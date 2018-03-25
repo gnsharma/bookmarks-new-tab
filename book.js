@@ -1,44 +1,56 @@
-function addElement (text) { 
-  // create a new div element 
-  var newDiv = document.createElement("div"); 
-  // and give it some content 
-  var newContent = document.createTextNode(text); 
-  // add the text node to the newly created div
-  newDiv.appendChild(newContent);  
-  return newDiv;
-  // add the newly created element and its content into the DOM 
+function addElement (item) { 
+    var newDiv = document.createElement("div"); 
+    newDiv.className += 'col s3';
+    
+    var newCard = document.createElement("div"); 
+    newCard.className += "card-panel ";
+    
+    var aTag = document.createElement('a');
+    aTag.setAttribute('href', item.url);
+    aTag.innerText = item.title;
+    
+    newCard.appendChild(aTag);
+    newDiv.appendChild(newCard);
+    return newDiv;
+    // add the newly created element and its content into the DOM 
 }
 
 function addAll(items){
-  //var currentDiv = document.getElementById("p1");
-  //document.body.insertAfter(newDiv, currentDiv);
-  for(item of items){
-    var newDiv = addElement(item);
-    document.body.appendChild(newDiv);
-  }
+    for(var i = 0; i < 12; i++){
+    	if ( i < 4) var currentDiv = document.getElementById("topRow");
+    	if ( i >= 4 && i < 8) var currentDiv = document.getElementById("middleRow");
+    	if ( i >= 8 && i < 12) var currentDiv = document.getElementById("bottomRow");
+    	var index = Math.floor(Math.random() * Math.floor(items.length))
+        var newDiv = addElement(items[index]);
+        currentDiv.appendChild(newDiv);
+    }
 }
 
 var items = [];
 function logItems(bookmarkItem) {
-  if (bookmarkItem.url) {
-    console.log(bookmarkItem.url);
-    items.push(bookmarkItem.url);
-  } 
-  if (bookmarkItem.children) {
-    for (child of bookmarkItem.children) {
-      logItems(child);
+    if (bookmarkItem.url) {
+        console.log(bookmarkItem.url);
+        if ( ['place:', 'about:'].indexOf(bookmarkItem.url.slice(0, 6)) == -1) {
+	    if ( bookmarkItem.url !== 'data:') {
+	        items.push(bookmarkItem);
+	    }
+	}
+    } 
+    if (bookmarkItem.children) {
+        for (child of bookmarkItem.children) {
+            logItems(child);
+        }
     }
-  }
-  return items;
+    return items;
 }
 
 function logTree(bookmarkItems) {
-  var items = logItems(bookmarkItems[0]);
-  addAll(items);
+    var items = logItems(bookmarkItems[0]);
+    addAll(items);
 }
 
 function onRejected(error) {
-  console.log(`An error: ${error}`);
+    console.log(`An error occurred: ${error}`);
 }
 
 var gettingTree = browser.bookmarks.getTree();
