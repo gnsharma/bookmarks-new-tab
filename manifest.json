@@ -3,6 +3,12 @@
     "name": "book-tabs",
     "version": "1.1",
 
+    "applications": {
+  	"gecko": {
+    	    "strict_min_version": "54.0"
+        }
+    },
+
     "chrome_url_overrides": {
         "newtab": "my-new-tab.html"
     },
@@ -20,7 +26,7 @@
     "content_scripts": [
         {
             "matches": ["<all_urls>"],
-            "js": ["book.js"]
+            "js": ["js/book.js"]
         }
     ] 
 }
