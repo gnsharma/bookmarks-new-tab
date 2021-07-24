@@ -1,18 +1,32 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
+  <NewTab :bookmarksList="bookmarksList" />
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import HelloWorld from './components/HelloWorld.vue'
+import { defineComponent, onMounted, ref } from "vue";
+import NewTab from "./components/NewTab.vue";
+import {
+  getBookmarksTree,
+  getBookmarksList,
+  getLimitedBookmarksList,
+} from "./book";
 
 export default defineComponent({
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-})
+    NewTab,
+  },
+  setup: () => {
+    const bookmarksList = ref([]);
+    onMounted(async () => {
+      const bookmarksTree = await getBookmarksTree();
+      bookmarksList.value = getLimitedBookmarksList(
+        getBookmarksList(bookmarksTree[0])
+      );
+    });
+    return { bookmarksList };
+  },
+});
 </script>
 
 <style>
@@ -22,6 +36,5 @@ export default defineComponent({
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

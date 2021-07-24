@@ -5,9 +5,10 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "serve": "vite preview",
-    "build-watch": "vue-tsc --noEmit && vite build --watch"
+    "build-watch": "vite build --watch"
   },
   "dependencies": {
+    "link-preview-js": "2.1.6",
     "vue": "^3.0.5"
   },
   "devDependencies": {

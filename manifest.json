@@ -18,6 +18,6 @@
   "description": "Replaces new tab page with a custom page which shows your bookmarks",
 
   "icons": {
-    "48": "dist/favicon.ico"
+    "48": "public/border-48.png"
   }
 }
