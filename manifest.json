@@ -1,26 +1,23 @@
 {
-    "manifest_version": 2,
-    "name": "book-tabs",
-    "version": "1.0",
+  "manifest_version": 2,
+  "name": "book-tabs",
+  "version": "1.2",
 
-    "chrome_url_overrides": {
-        "newtab": "my-new-tab.html"
-    },
+  "applications": {
+    "gecko": {
+      "strict_min_version": "54.0"
+    }
+  },
 
-    "permissions": [
-        "bookmarks"
-    ],
+  "chrome_url_overrides": {
+    "newtab": "dist/index.html"
+  },
 
-    "description": "Replaces new tab page with a custom page which shows your bookmarks",
+  "permissions": ["<all_urls>", "bookmarks"],
 
-    "icons": {
-        "48": "icons/border-48.png"
-    },
-    
-    "content_scripts": [
-        {
-            "matches": ["<all_urls>"],
-            "js": ["book.js"]
-        }
-    ] 
+  "description": "Replaces new tab page with a custom page which shows your bookmarks",
+
+  "icons": {
+    "48": "public/border-48.png"
+  }
 }
