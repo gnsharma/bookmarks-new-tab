@@ -15,7 +15,7 @@ jobs:
       - name: Sign the web-ext
         uses: saphareas/sign-web-extension-action@master
         with:
-          web-ext-id: "{ae6f4503-100c-4b9f-a31a-1065b172881e}"
+          web-ext-id: "ae6f4503-100c-4b9f-a31a-1065b172881e"
           sign-listed: true
           amo-api-key: ${{ user:10612034:97 }}
           amo-api-secret: ${{ 916bd5f29d5ba69780e94ef0f040f3800cf2271395cd93d947a3d9b624377a18 }}
